@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define size 10
-
+//piste maning github i// 
 typedef struct {
     int elem[size];
     int count;
@@ -10,7 +10,7 @@ void display(List L);
 List insertPos (List L, int data, int position);
 List deletePos(List L, int position);
 int locate (List L, int data);
-List insertSorted (List L, int data);
+List insertSorted (List L, int data); 
 
 
 int main(){
@@ -25,6 +25,7 @@ int main(){
     L =insertPos (L,20, 5);
     L =deletePos(L, 2);
     L = insertSorted (L, 5);
+    L = insertSorted (L, 3);
     display(L);
     printf("Count is: %d\n", L.count);
     locate (L, 20);
@@ -62,22 +63,23 @@ int locate (List L, int data){
     return i;
 }
 List insertSorted (List L, int data){
-    for (int i = 0; i<size;i++){
-        for(int j = i+1;j<size;j++){
-            if(L.elem[i] < L.elem[j]){
-                int temp;
-                L.elem[j] = temp;
-                L.elem[i] = L.elem[j];
-                temp = L.elem[i];
-            }
-        }
+      int i;
+    // shift elements to make space for the new data
+    for (i = L.count - 1; i >= 0 && L.elem[i] > data; i--) {
+        L.elem[i + 1] = L.elem[i];
     }
 
-}
+    // insert at the correct sorted position
+    L.elem[i + 1] = data;
+    L.count++;
 
+    return L;
+}
+ 
 
 void display(List L){
     for(int i=0;i<size;i++){
         printf("elem [%d] = %d\n", i, L.elem[i]);
     }
 }
+
