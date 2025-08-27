@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define size 10
-//piste maning github i// 
+
 typedef struct {
     int elem[size];
     int count;
@@ -64,12 +64,10 @@ int locate (List L, int data){
 }
 List insertSorted (List L, int data){
       int i;
-    // shift elements to make space for the new data
     for (i = L.count - 1; i >= 0 && L.elem[i] > data; i--) {
         L.elem[i + 1] = L.elem[i];
     }
 
-    // insert at the correct sorted position
     L.elem[i + 1] = data;
     L.count++;
 
