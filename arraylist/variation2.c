@@ -100,7 +100,7 @@ int locate(EPtr L, int data) {
     return -1; // not found
 }
 
-// Retrieve element at a specific position//
+// Retrieve element at a specific position
 int retrieve(EPtr L, int position) {
     if (position < 0 || position >= L->count) {
         printf("Invalid position!\n");
