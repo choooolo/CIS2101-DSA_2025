@@ -18,6 +18,10 @@ List* initialize ();
 void insertFirst(List *list, int data);
 void insertLast(List *list, int data);
 void insertPos(List *list, int data, int index);
+void deleteStart(List *list);
+void deleteLast(List *list);
+void deletePos(List *list, int index);
+
 
 int main() {
     List *L = initialize();
@@ -25,6 +29,10 @@ int main() {
     insertFirst(L, 10);
     insertLast(L, 15);
     insertPos(L,5,3);
+    deleteStart(L);
+    deleteLast(L);
+
+
    return 0;
 }
 
@@ -71,7 +79,7 @@ void insertPos(List *list, int data, int index) {
         insertFirst(list, data);
     }else if(index == list->count){
         insertLast(list,data);
-    }
+    }else{
     Node *current = list->head;
     for(int i=0;i<index-1;i++){
         current = current->next;
@@ -79,6 +87,50 @@ void insertPos(List *list, int data, int index) {
     newnode->next = current->next;
     current->next = newnode;
     list->count++;
-    
+    }
         
 }
+void deleteStart(List *list){
+    Node *temp = list->head;
+    list->head = temp->next;
+    free(temp);
+    list->count--;
+}
+
+void deleteLast(List *list) {
+
+    if (list->head->next == NULL) {
+        deleteStart(list);
+        return;
+    }else{
+    Node *current = list->head;
+
+    for (int i = 0; i < list->count - 2; i++) {
+        current = current->next;
+    }
+    Node *last = current->next;
+    free(last);
+    current->next = NULL;
+    list->count--;
+    }
+}
+void deletePos(List *list, int index){
+    int i=0;
+    if(index == 0){
+        deleteStart(list);
+    }else if(index == list->count){
+        void deleteLast(list);
+    }else{
+    Node *current = list->head;
+    for(int i=0;i<index-1;i++){
+        current = current->next;
+    }
+    
+    }
+        
+}
+
+
+   
+
+
