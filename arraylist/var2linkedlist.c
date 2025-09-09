@@ -22,6 +22,8 @@ void deleteStart(List *list);
 void deleteLast(List *list);
 void deletePos(List *list, int index);
 void display(List *list);
+int retrieve(List *list, int index);
+int locate(List *list, int data);
 
 
 int main() {
@@ -34,6 +36,10 @@ int main() {
     insertPos(L,6,3);
     deleteStart(L);
     deleteLast(L);
+    locate(L,1);
+    retrieve(L,2);
+  
+
     display(L);
 
 
@@ -149,4 +155,34 @@ void display(List *list){
         disp = disp->next;
         i++;
     }
+    printf("NULL");
+}
+
+int retrieve(List *list, int index){
+    Node* temp = list->head;
+    if(index > list->count-1){
+        printf("Index is invalid");
+    }else{
+        for(int i=0;i != index ;i++){
+            temp = temp->next;
+        }
+        printf("Index %d retrieved data is %d\n", index, temp->data);
+    }    
+}
+
+int locate(List *list, int data) {
+    if (list->head == NULL) {
+        printf("The list is empty.\n");
+        return -1;
+    }
+    Node* current = list->head;
+    for (int i = 0; current != NULL; i++) {
+        if (current->data == data) {
+            printf("Data %d found at index %d\n", data, i);
+            return i;
+        }
+        current = current->next;
+    }
+    printf("Data %d is not in the list.\n", data);
+    return -1;
 }
