@@ -26,8 +26,9 @@ int main(){
     push(s,50);
     pop(s);
     display(s);
-    sortStack(s);
+
     printf("\n");
+    sortStack(s);
     display(s);
     
 
@@ -85,23 +86,24 @@ void display(Stack* s){
     free(temp);
 }
 void sortStack(Stack* s) {
-    Stack aux;
-    aux.top = -1;   // ✅ fixed (properly initialize local stack)
-
-    while (!isEmpty(s)) {
-        int temp = pop(s);
-
-        // Move elements from aux back to s if they are greater than temp
-        while (!isEmpty(&aux) && peek(&aux) > temp) {
-            push(s, pop(&aux));
+    Stack* temp = initialize();
+    Stack* temp2 = initialize();
+    
+    while(!isEmpty(s)){
+        int current = pop(s);
+        while(!isEmpty(temp) && peek(temp) < current){
+            push(s,pop(temp));
         }
-
-        // Insert temp into correct position in aux
-        push(&aux, temp);
+        push(temp, current);
     }
-
-    // Copy sorted elements back into original stack
-    while (!isEmpty(&aux)) {
-        push(s, pop(&aux));
+    while(!isEmpty(temp)){
+        push(temp2,pop(temp));
     }
+    while(!isEmpty(temp2)){
+        push(s, pop(temp2));
+    }
+    free(temp);
+    free(temp2);
 }
+
+ 
